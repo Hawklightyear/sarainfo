@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SARA: Smart Agent เพื่อคำตอบที่เชื่อถือได้</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 2rem;
+        }
+        .infographic-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .title {
+            color: #1e40af;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #4b5563;
+            font-size: 1.25rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 0.75rem;
+        }
+        .item-card {
+            background-color: #f8fafc;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s;
+        }
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .item-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+        .item-card p {
+            font-size: 1rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+        .icon {
+            font-size: 2rem;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+        }
+        .highlight {
+            background-color: #d1fae5;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+        .saving-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #15803d;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="p-8">
+
+<div class="container">
+    <div class="infographic-card">
+        <h1 class="title">SARA: Smart Agent เพื่อคำตอบที่เชื่อถือได้</h1>
+        <p class="subtitle">ปฏิวัติกระบวนการทำงาน ลดเวลาและต้นทุนด้วยระบบจัดการองค์ความรู้ภายใน</p>
+
+        <div class="mb-8">
+            <h2 class="section-title">ปัญหาที่พบใน Work Process</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="item-card">
+                    <div class="icon">🤔</div>
+                    <h3>กระบวนการเดิมที่ไม่มีประสิทธิภาพ</h3>
+                    <p>พนักงานต้องสอบถามเพื่อนร่วมงานและผู้เชี่ยวชาญหลายคน ทำให้ต้องถามซ้ำและรอคำตอบนาน</p>
+                </div>
+                <div class="item-card">
+                    <div class="icon">⏳</div>
+                    <h3>ความสูญเปล่าที่เกิดขึ้น</h3>
+                    <ul class="list-disc ml-5 text-gray-700">
+                        <li>รอคำตอบจากผู้รู้</li>
+                        <li>ถามหลายคนและวนไปเรื่อยๆ</li>
+                        <li>คนมีความรู้ไม่ถูกใช้ประโยชน์เต็มที่</li>
+                        <li>ถามซ้ำ ตอบซ้ำ วนไปเรื่อยๆ</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="section-title">แนวทางแก้ไขด้วย SARA</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="item-card text-center">
+                    <div class="icon mx-auto">🤖</div>
+                    <h3>Smart Agent</h3>
+                    <p>ระบบ AI ที่ตอบคำถามจากฐานข้อมูลความรู้ทันที</p>
+                </div>
+                <div class="item-card text-center">
+                    <div class="icon mx-auto">✍️</div>
+                    <h3>Knowledge Keeper</h3>
+                    <p>ทีมที่ทำหน้าที่บันทึกและจัดการองค์ความรู้</p>
+                </div>
+                <div class="item-card text-center">
+                    <div class="icon mx-auto">✅</div>
+                    <h3>Knowledge Champion</h3>
+                    <p>ผู้ตรวจสอบความถูกต้องและจัดระเบียบข้อมูล</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-8">
+            <h2 class="section-title">การประหยัดเวลาและต้นทุน</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="highlight">
+                    <p class="text-xl font-semibold text-gray-800">Lean Time Saving</p>
+                    <p class="text-gray-600 mb-2">เวลาที่ประหยัดได้ต่อเดือน</p>
+                    <p class="saving-number">230 ชั่วโมง</p>
+                    <p class="text-sm text-gray-500">จากการลดเวลาจาก 2 ชม./คำถาม เหลือเพียง 5 นาที/คำถาม</p>
+                </div>
+                <div class="highlight">
+                    <p class="text-xl font-semibold text-gray-800">Cost Saving</p>
+                    <p class="text-gray-600 mb-2">ต้นทุนที่ประหยัดได้ต่อเดือน</p>
+                    <p class="saving-number">57,500 บาท</p>
+                    <p class="text-sm text-gray-500">จากค่าจ้างผู้เชี่ยวชาญที่ลดลง</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="section-title">ข้อมูลสำคัญอื่นๆ</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="item-card">
+                    <div class="icon">✨</div>
+                    <h3>ปัจจัยความสำเร็จ</h3>
+                    <ul class="list-disc ml-5 text-gray-700">
+                        <li>เทคโนโลยีต้องใช้งานง่ายและมีประสิทธิภาพ</li>
+                        <li>ผู้รู้ต้องร่วมมือในการเพิ่มองค์ความรู้</li>
+                    </ul>
+                </div>
+                <div class="item-card">
+                    <div class="icon">❗</div>
+                    <h3>ความเสี่ยงที่ต้องระวัง</h3>
+                    <ul class="list-disc ml-5 text-gray-700">
+                        <li>ผู้รู้ไม่มีเวลามาเพิ่มข้อมูล</li>
+                        <li>ขาดผู้ตรวจสอบความถูกต้อง</li>
+                        <li>คำตอบจากระบบอาจยังไม่ดีที่สุด</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

@@ -12,8 +12,8 @@
     <style>
         body {
             font-family: 'Kanit', sans-serif;
-            background-color: #e3f2fd;
-            color: #1a237e;
+            background-color: #f0f4f8; /* Light gray-blue */
+            color: #1a365d; /* Dark blue */
         }
         .container {
             max-width: 1200px;
@@ -25,23 +25,32 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
             border: 1px solid #e0e0e0;
         }
+        .main-title-gradient {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background-image: linear-gradient(to right, #4c51bf, #4fd1c5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
         .section-title {
             font-size: 2rem;
             font-weight: 700;
-            color: #1a237e;
+            color: #1a365d;
             margin-bottom: 1.5rem;
-            border-left: 6px solid #42a5f5;
+            border-left: 6px solid #4fd1c5; /* Teal */
             padding-left: 1rem;
         }
         .sub-section-title {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #1a237e;
+            color: #2b6cb0; /* Strong blue */
             margin-bottom: 1rem;
         }
         .stat-card {
-            background-color: #bbdefb;
-            color: #1a237e;
+            background-color: #e2e8f0; /* Lighter gray-blue */
+            color: #1a365d;
             padding: 2.5rem;
             border-radius: 1rem;
             text-align: center;
@@ -88,7 +97,7 @@
             position: relative;
             width: 80px;
             height: 2px;
-            background-color: #37474f;
+            background-color: #2b6cb0; /* Strong blue */
             animation: bounce-arrow 1.5s infinite ease-in-out;
         }
         .process-arrow::after {
@@ -96,7 +105,7 @@
             position: absolute;
             right: 0;
             top: -6px;
-            border: solid #37474f;
+            border: solid #2b6cb0;
             border-width: 0 2px 2px 0;
             display: inline-block;
             padding: 6px;
@@ -104,7 +113,7 @@
         }
         .arrow-label {
             font-size: 0.875rem;
-            color: #546e7a;
+            color: #4a5568;
             margin-top: -1.5rem;
             position: absolute;
             left: 50%;
@@ -138,7 +147,7 @@
         }
 
         .knowledge-hub {
-            background-color: #ffcdd2;
+            background-color: #bee3f8; /* Light blue */
             padding: 2rem;
             border-radius: 50%;
             display: flex;
@@ -152,6 +161,31 @@
             z-index: 10;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
+
+        /* Button styles with vibrant gradients and hover effects */
+        .btn-vibrant {
+            padding: 1rem 2rem;
+            font-weight: bold;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-vibrant:hover {
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .btn-prev {
+            background: linear-gradient(to right, #4c51bf, #667eea);
+            color: white;
+        }
+
+        .btn-next {
+            background: linear-gradient(to right, #4fd1c5, #81e6d9);
+            color: white;
+        }
     </style>
 </head>
 <body class="p-8">
@@ -159,7 +193,9 @@
     <!-- Page 1: The Problem -->
     <div id="page-1" class="infographic-card">
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">SARA: Smart Agent for Reliable Answers</h1>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
+                <span class="main-title-gradient">SARA: Smart Agent for Reliable Answers</span>
+            </h1>
             <p class="text-xl text-gray-600">ปฏิวัติกระบวนการทำงานภายในองค์กรด้วยระบบจัดการองค์ความรู้</p>
         </header>
 
@@ -235,7 +271,9 @@
     <!-- Page 2: The Solution -->
     <div id="page-2" class="infographic-card hidden">
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">SARA: Smart Agent for Reliable Answers</h1>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
+                <span class="main-title-gradient">SARA: Smart Agent for Reliable Answers</span>
+            </h1>
             <p class="text-xl text-gray-600">ปฏิวัติกระบวนการทำงานภายในองค์กรด้วยระบบจัดการองค์ความรู้</p>
         </header>
 
@@ -256,7 +294,7 @@
                     <p class="text-gray-600">ทีมผู้บันทึกและจัดการองค์ความรู้ให้ถูกต้อง</p>
                 </div>
                 <div class="flex flex-col items-center p-6 bg-white rounded-xl shadow-md transform transition-transform duration-300 hover:scale-105">
-                    <div class="w-16 h-16 flex items-center justify-center bg-yellow-500 rounded-full text-white text-3xl mb-2">🛡️</div>
+                    <div class="w-16 h-16 flex items-center justify-center bg-teal-500 rounded-full text-white text-3xl mb-2">🛡️</div>
                     <h3 class="sub-section-title">Knowledge Champion</h3>
                     <p class="text-gray-600">ผู้ตรวจสอบและจัดระเบียบข้อมูลให้สมบูรณ์</p>
                 </div>
@@ -308,14 +346,14 @@
             </div>
             
             <div class="grid lg:grid-cols-2 gap-8">
-                <div class="p-6 bg-indigo-50 rounded-xl shadow-inner">
+                <div class="p-6 bg-gray-100 rounded-xl shadow-inner">
                     <h3 class="sub-section-title text-center">การเปรียบเทียบเวลาที่ใช้ต่อเดือน</h3>
                     <p class="text-center text-gray-600 mb-4">แสดงถึงประสิทธิภาพที่เพิ่มขึ้นจากการใช้ SARA</p>
                     <div class="chart-container">
                         <canvas id="timeComparisonChart"></canvas>
                     </div>
                 </div>
-                <div class="p-6 bg-teal-50 rounded-xl shadow-inner">
+                <div class="p-6 bg-gray-100 rounded-xl shadow-inner">
                     <h3 class="sub-section-title text-center">สัดส่วนเวลาที่สูญเสียไป</h3>
                     <p class="text-center text-gray-600 mb-4">เวลาที่ใช้ไปกับการค้นหาข้อมูลเทียบกับเวลาทั้งหมด</p>
                     <div class="chart-container">
@@ -370,19 +408,19 @@
             </p>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center justify-center relative py-12">
                 <!-- Row 1: Source boxes -->
-                <div class="source-box bg-teal-100 text-teal-800">
+                <div class="source-box bg-blue-100 text-blue-800">
                     <span class="text-4xl">📄</span>
                     <p>เอกสาร & Guidelines</p>
                 </div>
-                <div class="source-box bg-purple-100 text-purple-800">
+                <div class="source-box bg-indigo-100 text-indigo-800">
                     <span class="text-4xl">💬</span>
                     <p>บทสนทนาจาก Chat</p>
                 </div>
-                <div class="source-box bg-orange-100 text-orange-800">
+                <div class="source-box bg-purple-100 text-purple-800">
                     <span class="text-4xl">🎙️</span>
                     <p>ไฟล์เสียงจาก Meeting</p>
                 </div>
-                <div class="source-box bg-blue-100 text-blue-800">
+                <div class="source-box bg-pink-100 text-pink-800">
                     <span class="text-4xl">🗺️</span>
                     <p>BA Skill Framework</p>
                 </div>
@@ -394,7 +432,7 @@
 
             <!-- Central Knowledge Hub -->
             <div class="flex flex-col items-center justify-center mt-12">
-                <div class="knowledge-hub text-red-800">
+                <div class="knowledge-hub text-cyan-800">
                     <span class="text-7xl">🧠</span>
                     <p class="font-bold text-lg mt-4">คลังความรู้</p>
                 </div>
@@ -405,19 +443,39 @@
         </section>
     </div>
 
+    <!-- Page 7: Conclusion -->
+    <div id="page-7" class="infographic-card hidden">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">บทสรุปความสำเร็จ</h1>
+            <p class="text-xl text-gray-600">SARA ทำให้พนักงานมีความสุข</p>
+        </header>
+
+        <section class="mb-12 text-center">
+            <div class="flex flex-col items-center justify-center mb-8">
+                <span class="text-9xl mb-4">😊</span>
+                <h2 class="section-title text-center border-none p-0">พนักงานมีความสุขกับ SARA</h2>
+            </div>
+            <p class="text-gray-700 leading-relaxed max-w-2xl mx-auto">
+                SARA เป็นมากกว่าระบบจัดการองค์ความรู้ แต่เป็นเครื่องมือที่ช่วยเพิ่มประสิทธิภาพการทำงานและสร้างความสุขให้แก่พนักงาน
+                เมื่อพนักงานสามารถเข้าถึงคำตอบที่รวดเร็วและแม่นยำได้ตลอดเวลา ความหงุดหงิดจากการค้นหาข้อมูลที่ยาวนานก็หายไป
+                ทำให้พวกเขามีเวลามากขึ้นในการทำสิ่งที่สำคัญและสร้างสรรค์ และมีความสุขกับการทำงานในองค์กรของเราอย่างแท้จริง
+            </p>
+        </section>
+    </div>
+
     <!-- Navigation Buttons -->
     <div class="flex justify-between mt-12">
-        <button id="prev-btn" onclick="goToPage(currentPage - 1)" class="px-8 py-4 bg-gray-600 text-white font-bold rounded-full shadow-lg hover:bg-gray-700 transition-colors transform hover:scale-105">
+        <button id="prev-btn" onclick="goToPage(currentPage - 1)" class="btn-vibrant btn-prev">
             Back
         </button>
-        <button id="next-btn" onclick="goToPage(currentPage + 1)" class="px-8 py-4 bg-indigo-600 text-white font-bold rounded-full shadow-lg hover:bg-indigo-700 transition-colors transform hover:scale-105">
+        <button id="next-btn" onclick="goToPage(currentPage + 1)" class="btn-vibrant btn-next">
             Next
         </button>
     </div>
 
     <script>
         let currentPage = 1;
-        const totalPages = 6;
+        const totalPages = 7;
         const pages = Array.from({ length: totalPages }, (_, i) => document.getElementById(`page-${i + 1}`));
         let timeComparisonChartInstance = null;
         let timePieChartInstance = null;
@@ -458,7 +516,7 @@
                     datasets: [{
                         label: 'เวลาที่ใช้ (ชั่วโมง)',
                         data: [240, 10],
-                        backgroundColor: ['#1a237e', '#42a5f5'],
+                        backgroundColor: ['#4c51bf', '#4fd1c5'],
                     }]
                 },
                 options: {
@@ -498,7 +556,7 @@
                     datasets: [{
                         label: 'สัดส่วนเวลา',
                         data: [230, 10],
-                        backgroundColor: ['#ef5350', '#42a5f5'],
+                        backgroundColor: ['#ef4444', '#4fd1c5'],
                         hoverOffset: 4
                     }]
                 },

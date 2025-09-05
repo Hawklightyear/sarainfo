@@ -5,182 +5,556 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SARA: Smart Agent เพื่อคำตอบที่เชื่อถือได้</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Kanit', sans-serif;
-            background-color: #f0f4f8;
-            color: #1e293b;
+            background-color: #e3f2fd;
+            color: #1a237e;
         }
         .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 2rem;
+            max-width: 1200px;
         }
         .infographic-card {
             background-color: #ffffff;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            padding: 2.5rem;
-            border: 1px solid #e2e8f0;
-        }
-        .title {
-            color: #1e40af;
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 0.5rem;
-        }
-        .subtitle {
-            color: #4b5563;
-            font-size: 1.25rem;
-            text-align: center;
-            margin-bottom: 3rem;
+            border-radius: 1.5rem;
+            padding: 3rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
         }
         .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 1.5rem;
+            border-left: 6px solid #42a5f5;
+            padding-left: 1rem;
+        }
+        .sub-section-title {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #334155;
-            margin-bottom: 1rem;
-            border-left: 4px solid #3b82f6;
-            padding-left: 0.75rem;
-        }
-        .item-card {
-            background-color: #f8fafc;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid #e2e8f0;
-            transition: transform 0.2s;
-        }
-        .item-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        .item-card h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 0.5rem;
-        }
-        .item-card p {
-            font-size: 1rem;
-            color: #475569;
-            line-height: 1.6;
-        }
-        .icon {
-            font-size: 2rem;
-            color: #3b82f6;
+            color: #1a237e;
             margin-bottom: 1rem;
         }
-        .highlight {
-            background-color: #d1fae5;
-            padding: 2rem;
+        .stat-card {
+            background-color: #bbdefb;
+            color: #1a237e;
+            padding: 2.5rem;
             border-radius: 1rem;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
         }
-        .saving-number {
-            font-size: 3rem;
+        .stat-number {
+            font-size: 4rem;
             font-weight: 700;
-            color: #15803d;
+            line-height: 1;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            max-height: 400px;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .process-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            text-align: center;
+            font-size: 1.125rem;
+        }
+        .person-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 1rem 1.5rem;
+            min-width: 120px;
+        }
+        .person-icon {
+            font-size: 3.5rem;
+            line-height: 1;
             margin-bottom: 0.5rem;
+            transition: transform 0.3s ease-in-out;
+        }
+        .person-icon:hover {
+            transform: scale(1.1);
+        }
+        .process-arrow {
+            position: relative;
+            width: 80px;
+            height: 2px;
+            background-color: #37474f;
+            animation: bounce-arrow 1.5s infinite ease-in-out;
+        }
+        .process-arrow::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -6px;
+            border: solid #37474f;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 6px;
+            transform: rotate(-45deg);
+        }
+        .arrow-label {
+            font-size: 0.875rem;
+            color: #546e7a;
+            margin-top: -1.5rem;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+        @keyframes bounce-arrow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .source-box {
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            font-weight: 600;
+            position: relative;
+            transition: transform 0.3s ease-in-out;
+        }
+        .source-box:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .knowledge-hub {
+            background-color: #ffcdd2;
+            padding: 2rem;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body class="p-8">
 
-<div class="container">
-    <div class="infographic-card">
-        <h1 class="title">SARA: Smart Agent เพื่อคำตอบที่เชื่อถือได้</h1>
-        <p class="subtitle">ปฏิวัติกระบวนการทำงาน ลดเวลาและต้นทุนด้วยระบบจัดการองค์ความรู้ภายใน</p>
+    <!-- Page 1: The Problem -->
+    <div id="page-1" class="infographic-card">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">SARA: Smart Agent for Reliable Answers</h1>
+            <p class="text-xl text-gray-600">ปฏิวัติกระบวนการทำงานภายในองค์กรด้วยระบบจัดการองค์ความรู้</p>
+        </header>
 
-        <div class="mb-8">
+        <section class="mb-12">
             <h2 class="section-title">ปัญหาที่พบใน Work Process</h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="item-card">
-                    <div class="icon">🤔</div>
-                    <h3>กระบวนการเดิมที่ไม่มีประสิทธิภาพ</h3>
-                    <p>พนักงานต้องสอบถามเพื่อนร่วมงานและผู้เชี่ยวชาญหลายคน ทำให้ต้องถามซ้ำและรอคำตอบนาน</p>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                ในปัจจุบัน กระบวนการทำงานเดิมยังไม่มีประสิทธิภาพ เมื่อพนักงานมีคำถามเกี่ยวกับระบบหรือกระบวนการใดๆ มักต้องเสียเวลาไปกับการค้นหาคำตอบที่ไม่เป็นระบบ
+            </p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 bg-red-100 rounded-xl">
+                    <h3 class="sub-section-title">ขั้นตอนการค้นหาคำตอบที่ซ้ำซ้อน</h3>
+                    <div class="process-visual">
+                        <div class="person-step">
+                            <span class="person-icon">🧐</span>
+                            <p class="font-semibold mt-2">พนักงานใหม่/พนักงานติดปัญหา</p>
+                            <p class="text-sm text-gray-500">มีคำถาม</p>
+                        </div>
+                        <div class="relative flex-shrink-0 w-24 flex items-center justify-center">
+                            <div class="process-arrow"></div>
+                            <span class="arrow-label bg-red-100 px-2 py-1 rounded-full text-red-600">ถาม</span>
+                        </div>
+                        <div class="person-step">
+                            <span class="person-icon">🧑‍💼</span>
+                            <p class="font-semibold mt-2">Domain Expert 1</p>
+                            <p class="text-sm text-gray-500">ให้คำตอบไม่ครบ</p>
+                        </div>
+                        <div class="relative flex-shrink-0 w-24 flex items-center justify-center">
+                            <div class="process-arrow"></div>
+                            <span class="arrow-label bg-red-100 px-2 py-1 rounded-full text-red-600">ถามต่อ</span>
+                        </div>
+                        <div class="person-step">
+                            <span class="person-icon">👩‍💼</span>
+                            <p class="font-semibold mt-2">Domain Expert 2</p>
+                            <p class="text-sm text-gray-500">ให้คำตอบไม่ครบ</p>
+                        </div>
+                        <div class="relative flex-shrink-0 w-24 flex items-center justify-center">
+                            <div class="process-arrow"></div>
+                            <span class="arrow-label bg-red-100 px-2 py-1 rounded-full text-red-600">วนซ้ำ</span>
+                        </div>
+                        <div class="person-step">
+                            <span class="person-icon">🤔</span>
+                            <p class="font-semibold mt-2">หลากหลายผลลัพธ์</p>
+                        </div>
+                    </div>
+                    <ul class="list-none space-y-2 mt-4 text-gray-700">
+                        <li class="flex items-center"><span class="text-xl mr-3 text-green-600">✅</span>ได้คำตอบที่ต้องการ</li>
+                        <li class="flex items-center"><span class="text-xl mr-3 text-red-600">❌</span>ไม่ได้คำตอบ</li>
+                        <li class="flex items-center"><span class="text-xl mr-3 text-yellow-600">⚠️</span>ได้คำตอบไม่ครบ</li>
+                        <li class="flex items-center"><span class="text-xl mr-3 text-orange-600">❓</span>ได้คำตอบไม่ถูก</li>
+                    </ul>
                 </div>
-                <div class="item-card">
-                    <div class="icon">⏳</div>
-                    <h3>ความสูญเปล่าที่เกิดขึ้น</h3>
-                    <ul class="list-disc ml-5 text-gray-700">
-                        <li>รอคำตอบจากผู้รู้</li>
-                        <li>ถามหลายคนและวนไปเรื่อยๆ</li>
-                        <li>คนมีความรู้ไม่ถูกใช้ประโยชน์เต็มที่</li>
-                        <li>ถามซ้ำ ตอบซ้ำ วนไปเรื่อยๆ</li>
+                <div class="p-6 bg-red-100 rounded-xl">
+                    <h3 class="sub-section-title">ความสูญเปล่าในกระบวนการ</h3>
+                    <ul class="list-none space-y-3 text-gray-700">
+                        <li class="flex items-center">
+                            <span class="text-xl mr-3 font-bold text-red-600">W</span>⌛ รอคำตอบจากผู้รู้ (Waiting)
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-xl mr-3 font-bold text-red-600">M</span>🚶‍♂️ ถามหลายคนและวนไปเรื่อยๆ (Motion)
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-xl mr-3 font-bold text-red-600">N</span>🧠💡 คนที่มีความรู้ไม่ถูกใช้ประโยชน์เต็มที่ (Non-utilization of Talent)
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-xl mr-3 font-bold text-red-600">O</span>🔄 ถามซ้ำ ตอบซ้ำ วนไปเรื่อยๆ (Over-processing)
+                        </li>
                     </ul>
                 </div>
             </div>
-        </div>
-
-        <div class="mb-8">
-            <h2 class="section-title">แนวทางแก้ไขด้วย SARA</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="item-card text-center">
-                    <div class="icon mx-auto">🤖</div>
-                    <h3>Smart Agent</h3>
-                    <p>ระบบ AI ที่ตอบคำถามจากฐานข้อมูลความรู้ทันที</p>
-                </div>
-                <div class="item-card text-center">
-                    <div class="icon mx-auto">✍️</div>
-                    <h3>Knowledge Keeper</h3>
-                    <p>ทีมที่ทำหน้าที่บันทึกและจัดการองค์ความรู้</p>
-                </div>
-                <div class="item-card text-center">
-                    <div class="icon mx-auto">✅</div>
-                    <h3>Knowledge Champion</h3>
-                    <p>ผู้ตรวจสอบความถูกต้องและจัดระเบียบข้อมูล</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="mb-8">
-            <h2 class="section-title">การประหยัดเวลาและต้นทุน</h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="highlight">
-                    <p class="text-xl font-semibold text-gray-800">Lean Time Saving</p>
-                    <p class="text-gray-600 mb-2">เวลาที่ประหยัดได้ต่อเดือน</p>
-                    <p class="saving-number">230 ชั่วโมง</p>
-                    <p class="text-sm text-gray-500">จากการลดเวลาจาก 2 ชม./คำถาม เหลือเพียง 5 นาที/คำถาม</p>
-                </div>
-                <div class="highlight">
-                    <p class="text-xl font-semibold text-gray-800">Cost Saving</p>
-                    <p class="text-gray-600 mb-2">ต้นทุนที่ประหยัดได้ต่อเดือน</p>
-                    <p class="saving-number">57,500 บาท</p>
-                    <p class="text-sm text-gray-500">จากค่าจ้างผู้เชี่ยวชาญที่ลดลง</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="mb-8">
-            <h2 class="section-title">ข้อมูลสำคัญอื่นๆ</h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="item-card">
-                    <div class="icon">✨</div>
-                    <h3>ปัจจัยความสำเร็จ</h3>
-                    <ul class="list-disc ml-5 text-gray-700">
-                        <li>เทคโนโลยีต้องใช้งานง่ายและมีประสิทธิภาพ</li>
-                        <li>ผู้รู้ต้องร่วมมือในการเพิ่มองค์ความรู้</li>
-                    </ul>
-                </div>
-                <div class="item-card">
-                    <div class="icon">❗</div>
-                    <h3>ความเสี่ยงที่ต้องระวัง</h3>
-                    <ul class="list-disc ml-5 text-gray-700">
-                        <li>ผู้รู้ไม่มีเวลามาเพิ่มข้อมูล</li>
-                        <li>ขาดผู้ตรวจสอบความถูกต้อง</li>
-                        <li>คำตอบจากระบบอาจยังไม่ดีที่สุด</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
+        </section>
     </div>
-</div>
 
+    <!-- Page 2: The Solution -->
+    <div id="page-2" class="infographic-card hidden">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">SARA: Smart Agent for Reliable Answers</h1>
+            <p class="text-xl text-gray-600">ปฏิวัติกระบวนการทำงานภายในองค์กรด้วยระบบจัดการองค์ความรู้</p>
+        </header>
+
+        <section class="mb-12">
+            <h2 class="section-title">แนวทางแก้ไขด้วย SARA</h2>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                เราได้พัฒนา "SARA" เพื่อสร้างระบบนิเวศแห่งการจัดการองค์ความรู้ ที่ผสานพลังระหว่างบุคลากรและเทคโนโลยี
+            </p>
+            <div class="grid md:grid-cols-3 gap-8 text-center items-center">
+                <div class="flex flex-col items-center p-6 bg-white rounded-xl shadow-md transform transition-transform duration-300 hover:scale-105">
+                    <div class="w-16 h-16 flex items-center justify-center bg-blue-500 rounded-full text-white text-3xl mb-2">🧠</div>
+                    <h3 class="sub-section-title">Smart Agent</h3>
+                    <p class="text-gray-600">ระบบ AI ที่ให้คำตอบจากฐานข้อมูลความรู้ทันที</p>
+                </div>
+                <div class="flex flex-col items-center p-6 bg-white rounded-xl shadow-md transform transition-transform duration-300 hover:scale-105">
+                    <div class="w-16 h-16 flex items-center justify-center bg-green-500 rounded-full text-white text-3xl mb-2">📝</div>
+                    <h3 class="sub-section-title">Knowledge Keeper</h3>
+                    <p class="text-gray-600">ทีมผู้บันทึกและจัดการองค์ความรู้ให้ถูกต้อง</p>
+                </div>
+                <div class="flex flex-col items-center p-6 bg-white rounded-xl shadow-md transform transition-transform duration-300 hover:scale-105">
+                    <div class="w-16 h-16 flex items-center justify-center bg-yellow-500 rounded-full text-white text-3xl mb-2">🛡️</div>
+                    <h3 class="sub-section-title">Knowledge Champion</h3>
+                    <p class="text-gray-600">ผู้ตรวจสอบและจัดระเบียบข้อมูลให้สมบูรณ์</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Page 3: Tangible Outcomes - Quick & Accurate -->
+    <div id="page-3" class="infographic-card hidden">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">ผลลัพธ์ที่จับต้องได้</h1>
+            <p class="text-xl text-gray-600">คำตอบที่รวดเร็วและแม่นยำ</p>
+        </header>
+        
+        <section class="mb-12">
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                จากการวิเคราะห์กระบวนการทำงานและค่าใช้จ่าย SARA สามารถช่วยลดความสูญเสียในองค์กรได้อย่างมีนัยสำคัญ
+            </p>
+            <div class="stat-card">
+                <p class="text-xl font-medium mb-2">คำตอบที่รวดเร็วและแม่นยำ</p>
+                <div class="text-5xl my-2">✅</div>
+                <p class="text-xl font-semibold mt-0">ได้คำตอบที่ถูกต้องทันที</p>
+                <p class="text-sm mt-4 text-gray-700">จากสมมติฐาน: SARA สามารถตอบคำถามได้ด้วยความแม่นยำสูง</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Page 4: Tangible Outcomes - Time & Cost -->
+    <div id="page-4" class="infographic-card hidden">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">ผลลัพธ์ที่จับต้องได้</h1>
+            <p class="text-xl text-gray-600">การประหยัดเวลาและต้นทุน</p>
+        </header>
+
+        <section class="mb-12">
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="stat-card">
+                    <p class="text-xl font-medium mb-2">Lean Time Saving</p>
+                    <div class="stat-number">230</div>
+                    <p class="text-2xl font-semibold mt-0">ชั่วโมง/เดือน</p>
+                    <p class="text-sm mt-4 text-gray-700">จากสมมติฐาน: ลดเวลาจาก 2 ชม./คำถาม เหลือเพียง 5 นาที/คำถาม</p>
+                </div>
+                <div class="stat-card">
+                    <p class="text-xl font-medium mb-2">Cost Saving</p>
+                    <div class="stat-number">57,500</div>
+                    <p class="text-2xl font-semibold mt-0">บาท/เดือน</p>
+                    <p class="text-sm mt-4 text-gray-700">จากสมมติฐาน: คิดค่าตอบแทนผู้เชี่ยวชาญ 250 บาท/ชั่วโมง</p>
+                </div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="p-6 bg-indigo-50 rounded-xl shadow-inner">
+                    <h3 class="sub-section-title text-center">การเปรียบเทียบเวลาที่ใช้ต่อเดือน</h3>
+                    <p class="text-center text-gray-600 mb-4">แสดงถึงประสิทธิภาพที่เพิ่มขึ้นจากการใช้ SARA</p>
+                    <div class="chart-container">
+                        <canvas id="timeComparisonChart"></canvas>
+                    </div>
+                </div>
+                <div class="p-6 bg-teal-50 rounded-xl shadow-inner">
+                    <h3 class="sub-section-title text-center">สัดส่วนเวลาที่สูญเสียไป</h3>
+                    <p class="text-center text-gray-600 mb-4">เวลาที่ใช้ไปกับการค้นหาข้อมูลเทียบกับเวลาทั้งหมด</p>
+                    <div class="chart-container">
+                        <canvas id="timePieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Page 5: Success Factors & Risks -->
+    <div id="page-5" class="infographic-card hidden">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">เส้นทางสู่ความสำเร็จ</h1>
+            <p class="text-xl text-gray-600">ปัจจัยสำคัญและความเสี่ยง</p>
+        </header>
+
+        <section class="mb-12">
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                เพื่อผลักดันโครงการให้สำเร็จ เราได้ระบุปัจจัยสำคัญและความเสี่ยงที่ต้องบริหารจัดการ
+            </p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 bg-green-50 rounded-xl">
+                    <h3 class="sub-section-title">ปัจจัยความสำเร็จที่สำคัญ</h3>
+                    <ul class="list-none space-y-2 text-gray-700">
+                        <li class="flex items-center"><span class="text-xl mr-3">✅</span>เทคโนโลยีต้องใช้งานง่ายและมีประสิทธิภาพ</li>
+                        <li class="flex items-center"><span class="text-xl mr-3">✅</span>ผู้รู้ต้องร่วมมือในการเพิ่มองค์ความรู้เข้าสู่ระบบ</li>
+                    </ul>
+                </div>
+                <div class="p-6 bg-red-50 rounded-xl">
+                    <h3 class="sub-section-title">ความเสี่ยงและสิ่งที่ต้องระวัง</h3>
+                    <ul class="list-none space-y-2 text-gray-700">
+                        <li class="flex items-center"><span class="text-xl mr-3">⚠️</span>ผู้รู้ไม่มีเวลามาเพิ่มองค์ความรู้</li>
+                        <li class="flex items-center"><span class="text-xl mr-3">⚠️</span>ขาดผู้ตรวจสอบความถูกต้องและความครบถ้วน</li>
+                        <li class="flex items-center"><span class="text-xl mr-3">⚠️</span>คำตอบจากระบบอาจยังไม่ใช่คำตอบที่ดีที่สุดในบางกรณี</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Page 6: The Roadmap -->
+    <div id="page-6" class="infographic-card hidden">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">อนาคตของคลังความรู้</h1>
+            <p class="text-xl text-gray-600">สร้างคลังความรู้ที่สมบูรณ์แบบ</p>
+        </header>
+
+        <section class="mb-12">
+            <p class="text-gray-700 mb-6 leading-relaxed text-center">
+                ในอนาคต ระบบ SARA จะรวบรวมข้อมูลจากแหล่งต่างๆ เพื่อสร้างคลังความรู้ที่ครอบคลุมและอัปเดตอย่างต่อเนื่อง
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center justify-center relative py-12">
+                <!-- Row 1: Source boxes -->
+                <div class="source-box bg-teal-100 text-teal-800">
+                    <span class="text-4xl">📄</span>
+                    <p>เอกสาร & Guidelines</p>
+                </div>
+                <div class="source-box bg-purple-100 text-purple-800">
+                    <span class="text-4xl">💬</span>
+                    <p>บทสนทนาจาก Chat</p>
+                </div>
+                <div class="source-box bg-orange-100 text-orange-800">
+                    <span class="text-4xl">🎙️</span>
+                    <p>ไฟล์เสียงจาก Meeting</p>
+                </div>
+                <div class="source-box bg-blue-100 text-blue-800">
+                    <span class="text-4xl">🗺️</span>
+                    <p>BA Skill Framework</p>
+                </div>
+                <div class="source-box bg-rose-100 text-rose-800">
+                    <span class="text-4xl">📚</span>
+                    <p>คู่มือการใช้ต่างๆ</p>
+                </div>
+            </div>
+
+            <!-- Central Knowledge Hub -->
+            <div class="flex flex-col items-center justify-center mt-12">
+                <div class="knowledge-hub text-red-800">
+                    <span class="text-7xl">🧠</span>
+                    <p class="font-bold text-lg mt-4">คลังความรู้</p>
+                </div>
+                <p class="mt-4 text-center text-gray-600 max-w-sm">
+                    แหล่งข้อมูลทั้งหมดจะถูกประมวลผลและนำมาจัดเก็บไว้ในคลังความรู้กลาง
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex justify-between mt-12">
+        <button id="prev-btn" onclick="goToPage(currentPage - 1)" class="px-8 py-4 bg-gray-600 text-white font-bold rounded-full shadow-lg hover:bg-gray-700 transition-colors transform hover:scale-105">
+            Back
+        </button>
+        <button id="next-btn" onclick="goToPage(currentPage + 1)" class="px-8 py-4 bg-indigo-600 text-white font-bold rounded-full shadow-lg hover:bg-indigo-700 transition-colors transform hover:scale-105">
+            Next
+        </button>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 6;
+        const pages = Array.from({ length: totalPages }, (_, i) => document.getElementById(`page-${i + 1}`));
+        let timeComparisonChartInstance = null;
+        let timePieChartInstance = null;
+
+        const wrapLabels = (labels) => {
+            return labels.map(label => {
+                if (label.length <= 16) return label;
+                let words = label.split(' ');
+                let lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if (currentLine.length + word.length + 1 > 16) {
+                        lines.push(currentLine.trim());
+                        currentLine = word + ' ';
+                    } else {
+                        currentLine += word + ' ';
+                    }
+                });
+                lines.push(currentLine.trim());
+                return lines;
+            });
+        };
+        
+        // Function to render charts only when their page is visible
+        function renderCharts() {
+            if (timeComparisonChartInstance) {
+                timeComparisonChartInstance.destroy();
+            }
+            if (timePieChartInstance) {
+                timePieChartInstance.destroy();
+            }
+
+            const timeComparisonCtx = document.getElementById('timeComparisonChart').getContext('2d');
+            timeComparisonChartInstance = new Chart(timeComparisonCtx, {
+                type: 'bar',
+                data: {
+                    labels: wrapLabels(['ก่อนปรับปรุง', 'หลังปรับปรุง']),
+                    datasets: [{
+                        label: 'เวลาที่ใช้ (ชั่วโมง)',
+                        data: [240, 10],
+                        backgroundColor: ['#1a237e', '#42a5f5'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) {
+                                        return label.join(' ');
+                                    } else {
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            const timePieCtx = document.getElementById('timePieChart').getContext('2d');
+            timePieChartInstance = new Chart(timePieCtx, {
+                type: 'pie',
+                data: {
+                    labels: wrapLabels(['เวลาที่สูญเสียไป (230 ชม.)', 'เวลาที่ใช้จริง (10 ชม.)']),
+                    datasets: [{
+                        label: 'สัดส่วนเวลา',
+                        data: [230, 10],
+                        backgroundColor: ['#ef5350', '#42a5f5'],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) {
+                                        return label.join(' ');
+                                    } else {
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            if (prevBtn) prevBtn.style.display = currentPage === 1 ? 'none' : 'inline-block';
+            if (nextBtn) nextBtn.style.display = currentPage === totalPages ? 'none' : 'inline-block';
+        }
+
+        // Main navigation function
+        function goToPage(pageNumber) {
+            if (pageNumber < 1 || pageNumber > totalPages) return;
+            currentPage = pageNumber;
+
+            pages.forEach((page) => {
+                page.classList.add('hidden');
+                page.classList.remove('fade-in');
+            });
+            pages[currentPage - 1].classList.remove('hidden');
+            pages[currentPage - 1].classList.add('fade-in');
+
+            updateNavigationButtons();
+
+            // Re-render charts only when on the chart page
+            if (currentPage === 4) {
+                renderCharts();
+            }
+        }
+        
+        // Initialize the first page on load
+        window.onload = function() {
+            goToPage(1);
+        };
+    </script>
 </body>
 </html>
